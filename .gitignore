@@ -6,7 +6,5 @@
 03-代码设计/resource/*.pdf
 03-代码设计/resource/*_[0-9].docx
 output.doc
-*.jar
 03-代码设计/.settings
 .~*.*
-out/

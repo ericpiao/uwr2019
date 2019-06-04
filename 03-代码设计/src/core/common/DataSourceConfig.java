@@ -39,7 +39,7 @@ public class DataSourceConfig implements DataSourceType {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
-	//there should be only one ConstDataSource instance
+	//there should be only one ConstDataSource instance 只能有一个实例
 	//so this method will return the first DataSource which is of ConstDataSource
 	public ConstDataSource getConstDataSource() {
 		if (dataSources==null) return null;

@@ -16,7 +16,7 @@ import com.aspose.words.Node;
 import com.aspose.words.NodeType;
 
 /**
- * 统一Word报告生成系统（UWR）
+ * 统一Word报告生成系统（UWR） 
  * <foreach>标签的扫描与处理类
  * @author 张学龙
  * @author 朴勇 15641190702
@@ -111,7 +111,7 @@ public class ForeachMatchAction implements IReplacingCallback {
 					defaultValue = defaultValue.replaceFirst("\"", "");
 					logger.info("Default Value: " + defaultValue);
 				}
-				//获取separators
+				//获取separators 的相关信息
 				if (varinfo[i].matches("separator=\".*?\"")) {
 					separator = varinfo[i].toLowerCase().replaceFirst("separator=\"", "");
 					separator = separator.replaceFirst("\"", "");

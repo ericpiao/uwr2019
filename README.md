@@ -1,5 +1,9 @@
 # uwr
 Universal Word Report
+小组成员：
+张鹏飞 201693014
+许新矅 201692346
+李俊德 201693104
 1.前期准备
 test标记为test Sources Root、src标记为Sources Root
 添加lib文件夹为libraries

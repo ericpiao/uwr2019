@@ -43,6 +43,7 @@ public class DataSourceConfig implements DataSourceType {
 	//so this method will return the first DataSource which is of ConstDataSource
 	public ConstDataSource getConstDataSource() {
 		if (dataSources==null) return null;
+
 		for(int i=0; i<dataSources.size(); i++) {
 			DataSource ds = dataSources.get(i);
 			if ("ConstDataSource".equals(ds.getClass().getSimpleName()))

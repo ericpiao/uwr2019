@@ -10,6 +10,7 @@ import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -64,13 +65,22 @@ public class TestTemplateProcessor implements DataSourceType{
 		//4. 录制该静态Mock的行为模式（针对的是静态方法）；
         //------------------------------------------------
         //以上流程请在这里实现：
-        //
+		dsc =EasyMock.createMock(DataSourceConfig.class);
+		ConstDataSource ds=EasyMock.createMock(ConstDataSource.class);
+		EasyMock.expect(dsc.getConstDataSource()).andReturn(ds);
+		
+        EasyMock.expect(ds.getDataHolder("sex")).andReturn(holder);
+		//java.util.ArrayList<core.common.DataSource>
+		EasyMock.verify(dsc);
+		EasyMock.replay(dsc);
+		//
         //
         // 这里写代码
         //
         //------------------------------------------------
 		//5. 重放所有的行为。
-		PowerMock.replayAll(dsc);
+		PowerMock.mockStatic(DataSourceConfig.class);
+	    PowerMock.replayAll(dsc);
 		//初始化一个待测试类（SUT）的实例
 		tp = new TemplateProcessor();
 	}

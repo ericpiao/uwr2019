@@ -40,14 +40,12 @@ public abstract class DataHolder implements DataType {
 	
 	//数据填充
 	public  String fillValue() throws Exception {
-		
 		if (this.getValue() != null)  return null; //already filled
 		if (this.getHolderFiller() != null)
 			return getHolderFiller().fill(this);
 		else
 			return null;
 	}
-	
 	//数据呈现
 	public  int renderValue(ReplacingArgs e, String[] varinfo) throws Exception {
 		if (getHolderRender()!=null)
@@ -175,7 +173,6 @@ public abstract class DataHolder implements DataType {
 		String s = null;
 		if (val instanceof String) s = (String) val;
 		else return null;
-		
 		String parm[] = parms.split(",");
 		if (parm.length != 2) return null;
 		if (parm[0]==null) return null;

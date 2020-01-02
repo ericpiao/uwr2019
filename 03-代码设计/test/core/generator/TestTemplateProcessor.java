@@ -10,6 +10,7 @@ import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -60,8 +61,37 @@ public class TestTemplateProcessor implements DataSourceType{
 		//参照流程：
 		//1. 使用EasyMock建立一个DataSourceConfig类的一个Mock对象实例；
 		//2. 录制该实例的STUB模式和行为模式（针对的是非静态方法）；
+		dsc=EasyMock.createMock(DataSourceConfig.class);
+		//对测试方法中用到的DataHolder的dh1,dh2,dh3配置
+		DataHolder dh1=EasyMock.createMock(DataHolder.class);
+		dh1.setName("sex");
+		EasyMock.expect(dh1.getValue()).andReturn("Female");
+		DataHolder dh2=EasyMock.createMock(DataHolder.class);
+		dh2.setName("readme");
+		EasyMock.expect(dh2.getValue()).andReturn("5");
+		DataHolder dh3=EasyMock.createMock(DataHolder.class);
+		dh3.setName("testexpr");
+		EasyMock.expect(dh3.getValue()).andReturn("5.0");
+		EasyMock.expect(dh3.getExpr()).andReturn("${num}+${readme}");
+		EasyMock.expect(dh3.fillValue()).andReturn(null);
+
+		ArrayList<DataHolder> dhs=new ArrayList<>();
+		dhs.add(dh1);
+		dhs.add(dh2);
+		dhs.add(dh3);
+
+		//ConstDataSource配置
+		ConstDataSource cds=EasyMock.createMock(ConstDataSource.class);
+		cds.setVars(dhs);
+		EasyMock.expect(cds.getVars()).andStubReturn(dhs);
+		EasyMock.expect(cds.getDataHolder("sex")).andReturn(dh1);
+		EasyMock.expect(cds.getDataHolder("readme")).andReturn(dh2);
+		EasyMock.expect(cds.getDataHolder("testexpr")).andReturn(dh3);
+		EasyMock.replay(cds,dh1,dh2,dh3);
 		//3. 使用PowerMock建立DataSourceConfig类的静态Mock；
+		PowerMock.mockStatic(DataSourceConfig.class);
 		//4. 录制该静态Mock的行为模式（针对的是静态方法）；
+		EasyMock.expect(DataSourceConfig.newInstance()).andStubReturn(dsc);
         //------------------------------------------------
         //以上流程请在这里实现：
         //
